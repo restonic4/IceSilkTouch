@@ -1,7 +1,10 @@
 plugins {
-	id 'maven-publish'
-	id 'fabric-loom' version '1.17-SNAPSHOT'
-	id 'ploceus' version '1.17-SNAPSHOT'
+	id 'java'
+	id 'net.fabricmc.fabric-loom-remap' version '1.17.20'
+	id 'ploceus' version '1.17.7'
+}
+
+loom {
 }
 
 base {
@@ -26,9 +29,12 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	exceptions ploceus.raven(project.raven_build)
-	signatures ploceus.sparrow(project.sparrow_build)
-	nests ploceus.nests(project.nests_build)
+	clientExceptions ploceus.raven(project.client_raven_build, 'client')
+	serverExceptions ploceus.raven(project.server_raven_build, 'server')
+	clientSignatures ploceus.sparrow(project.client_sparrow_build, 'client')
+	serverSignatures ploceus.sparrow(project.server_sparrow_build, 'server')
+	clientNests ploceus.nests(project.client_nests_build, 'client')
+	serverNests ploceus.nests(project.server_nests_build, 'server')
 	mappings ploceus.featherMappings(project.feather_build)
 
 	ploceus.dependOsl(project.osl_version)
@@ -36,9 +42,13 @@ dependencies {
 
 processResources {
 	inputs.property 'version', version
+	inputs.property 'minecraft_version', minecraft_version
 
 	filesMatching('fabric.mod.json') {
-		expand 'version': version
+		expand (
+			'version': version,
+			'minecraft_version': minecraft_version
+		)
 	}
 }
 
@@ -65,22 +75,5 @@ java {
 jar {
 	from('LICENSE') {
 		rename { "${it}_${base.archivesName.get()}" }
-	}
-}
-
-// Configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }

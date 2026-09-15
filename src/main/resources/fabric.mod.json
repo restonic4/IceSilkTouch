@@ -1,30 +1,29 @@
 {
 	"schemaVersion": 1,
-	"id": "example_mod",
+	"id": "ice_silk_touch",
 	"version": "${version}",
-	"name": "Example mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Ice Silk Touch",
+	"description": "Silk Touch makes ice drop itself",
 	"authors": [
-		"Me!"
+		"restonic4"
 	],
 	"contact": {
-		"homepage": "https://example.com/",
-		"sources": "https://github.com/OrnitheMC/ornithe-template-mod"
+		"sources": "https://github.com/restonic4/IceSilkTouch"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/example_mod/icon.png",
+	"license": "MIT",
+	"icon": "assets/ice_silk_touch/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"init": [
-			"com.example.example_mod.ExampleMod"
+			"com.restonic4.ice_silk_touch.IceSilkTouch"
 		]
 	},
 	"mixins": [
-		"example_mod.mixins.json"
+		"ice_silk_touch.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.17.3",
-		"minecraft": "1.7.2",
+		"fabricloader": ">=0.19.5",
+    "minecraft": "${minecraft_version}",
 		"osl-entrypoints": ">=0.4.0"
 	}
 }

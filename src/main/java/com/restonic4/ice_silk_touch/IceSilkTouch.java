@@ -1,11 +1,11 @@
-package com.example.example_mod;
+package com.restonic4.ice_silk_touch;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.ornithemc.osl.entrypoints.api.ModInitializer;
 
-public class ExampleMod implements ModInitializer {
+public class IceSilkTouch implements ModInitializer {
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod name as the logger's name.
